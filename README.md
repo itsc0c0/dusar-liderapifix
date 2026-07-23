@@ -85,11 +85,6 @@ Operatörün gerçekten düşük yetkili olduğunun ve ortamın ayakta olduğunu
 
 <p align="center"><img src="ldapsearch.png" width="820" alt="docker compose ps ve operator liderPrivilege ROLE_USER ROLE_AGENT_INFO"></p>
 
-### PoC Videosu (4:25)
-
-İki makineli, uçtan uca canlı sömürünün düzenlenmiş ekran kaydı (altyazı ve yakınlaştırma eklenmiş). Dosya boyutu GitHub'ın tek-dosya sınırı (100 MB) üzerinde olduğundan **[Releases](https://github.com/itsc0c0/dusar-liderapifix/releases)** bölümünden erişilebilir.
-
----
 
 ## 3. Düzeltme (DUSAR)
 
