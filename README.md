@@ -67,7 +67,7 @@ Kurulum ACL'i `userPassword` yazımını yalnız `adminGroups` üyelerine (ve se
 
 <p align="center"><img src="ldapconfig_temp-L217-226.png" width="640" alt="adminGroups grup tanimi"></p>
 
-> **Not (dürüst nüans):** Sömürülebilir operatör `adminGroups` üyesidir; kırılan şey, operatörleri **rollerine** göre ayırması gereken **konsol (liderapi) fonksiyon-seviyesi yetkilendirmesidir**. Bu kontrol yayımlı tüm sürümlerde tümüyle yoktur.
+> **Not:** Sömürülebilir operatör `adminGroups` üyesidir; kırılan şey, operatörleri **rollerine** göre ayırması gereken **konsol (liderapi) fonksiyon-seviyesi yetkilendirmesidir**. Bu kontrol yayımlı tüm sürümlerde tümüyle yoktur.
 
 ---
 
