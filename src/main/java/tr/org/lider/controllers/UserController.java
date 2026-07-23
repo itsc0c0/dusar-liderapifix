@@ -1,3 +1,4 @@
+
 package tr.org.lider.controllers;
 
 import java.util.ArrayList;
@@ -432,6 +433,21 @@ public class UserController {
 	@PostMapping(value = "/update-user-password",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<LdapEntry> updateUserPassword(LdapEntry selectedEntry) {
 		try {
+			tr.org.lider.security.User caller = tr.org.lider.services.AuthenticationService.getUser();
+			String targetDn = selectedEntry.getDistinguishedName();
+			boolean callerIsAdmin = caller != null && caller.getRoles() != null && caller.getRoles().contains(RoleConstants.ROLE_ADMIN);
+			boolean callerOwnsTarget = caller != null && caller.getDn() != null && targetDn != null && caller.getDn().equalsIgnoreCase(targetDn.trim());
+			if (!callerIsAdmin && !callerOwnsTarget) {
+				List<LdapEntry> targetEntries = ldapService.findSubEntries(targetDn, "(objectclass=*)", new String[] {"liderPrivilege"}, SearchScope.OBJECT);
+				boolean targetIsPrivileged = true;
+				if (targetEntries != null && !targetEntries.isEmpty()) {
+					String[] targetPrivileges = targetEntries.get(0).getAttributesMultiValues().get("liderPrivilege");
+					targetIsPrivileged = targetPrivileges != null && java.util.Arrays.asList(targetPrivileges).contains(RoleConstants.ROLE_ADMIN);
+				}
+				if (targetIsPrivileged) {
+					return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+				}
+			}
 		
 			if(!"".equals(selectedEntry.getUserPassword())){
 				ldapService.updateEntry(selectedEntry.getDistinguishedName(), "userPassword", "{ARGON2}" + customPasswordEncoder.encode(selectedEntry.getUserPassword()));
